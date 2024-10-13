@@ -1,14 +1,9 @@
-export default class Bulding {
+export default class Building {
   constructor(sqft) {
-    this._sqft = sqft;
-    this.constructor[Symbol.species]();
-  }
-
-  static [Symbol.species]() {
-    if (typeof this.prototype.evacuationWarningMessage !== 'function') {
-      throw Error('Class extending Building must override evacuationWarningMessage');
+    if (typeof this.evacuationWarningMessage !== 'function' && new.target !== Building) {
+      throw new Error('Class extending Building must override evacuationWarningMessage');
     }
-    return this;
+    this._sqft = sqft;
   }
 
   set sqft(sqft) {
