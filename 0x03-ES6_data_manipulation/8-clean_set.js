@@ -1,6 +1,6 @@
 export default function cleanSet(set, startString) {
   let str = '';
-  if (Boolean(startString) === false) {
+  if (typeof startString !== 'string' || Boolean(startString) === false) {
     return '';
   }
   set.forEach((element) => {
