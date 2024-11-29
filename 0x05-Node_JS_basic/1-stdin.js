@@ -1,4 +1,4 @@
-const process = require('node:process');
+const process = require('process');
 
 console.log('Welcome to Holberton School, what is your name?');
 
