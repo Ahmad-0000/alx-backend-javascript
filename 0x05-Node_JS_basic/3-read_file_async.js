@@ -3,6 +3,7 @@ const fs = require('fs').promises;
 async function countStudents(path) {
   try {
     const studentsData = {};
+    const keys = [];
     let data = await fs.readFile(path, { encoding: 'utf8' });
     data = data.split('\n');
     data = data.slice(1);
@@ -23,8 +24,12 @@ async function countStudents(path) {
     console.log(`Number of students: ${studentsNum}`);
     for (const f in studentsData) {
       if (f in studentsData) {
-        console.log(`Number of students in ${f}: ${studentsData[f].num}. LIST: ${studentsData[f].names.join(', ')}`);
+        keys.push(f);
       }
+    }
+    keys.sort();
+    for (const key of keys) {
+      console.log(`Number of students in ${key}: ${studentsData[key].num}. LIST: ${studentsData[key].names.join(', ')}`);
     }
   } catch (error) {
     throw new Error('Cannot load the database');
