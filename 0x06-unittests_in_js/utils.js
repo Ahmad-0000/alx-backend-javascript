@@ -1,7 +1,7 @@
-const utils = {
-  calculatenumber: function (type, a, b) {
-    const c = math.round(a);
-    const d = math.round(b);
+const Utils = {
+  calculateNumber: function (type, a, b) {
+    const c = Math.round(a);
+    const d = Math.round(b);
   
     if (type === 'SUM') {
       return c + d;
@@ -15,4 +15,4 @@ const utils = {
   }
 };
 
-module.exports = utils;
+module.exports = Utils;
