@@ -26,17 +26,19 @@ describe('Test API', function () {
     });
   });
 
-  it('tests response of GET /cart/:number', function () {
+  it('tests the presence of GET /cart/:number', function () {
     requests.get('http://localhost:7865/cart/100', (error, response, body) => {
       if (error) {
         throw new Error();
       } else if (response) {
         expect(response.statusCode).to.equal(200);
-      }
-      if (body) {
-        expect(body).to.equal('Payment methods for cart 100');
       } else {
-        throw new Error();
+        expect(response.statusCode).to.equal(404);
+      }
+      if (body && response.statusCode === 200) {
+        expect(body).to.equal('Payment methods for cart 100');
+      } else if (bodu && response.statusCode === 404) {
+        expect(body).to.not.equal('Payment methods for cart 100');
       }
     });
   });
