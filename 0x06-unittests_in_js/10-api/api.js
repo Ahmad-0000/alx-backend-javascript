@@ -24,7 +24,7 @@ app.get('/available_payments', (request, response) => {
 
 app.post('/login', (r, response) => {
   const name = r.body.userName;
-  response.send(`your name is "${name}"`);
+  response.send(`Welcome ${name}`);
 });
 
 app.listen(7865, function () {
