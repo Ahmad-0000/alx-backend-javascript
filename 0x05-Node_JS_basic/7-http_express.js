@@ -3,13 +3,17 @@ const process = require('process');
 
 const database = process.argv[2];
 const app = express();
-const list = `Number of students: 10` + `\nNumber of students in CS: 6. LIST: ahmad, ali, unknown, shaza, amna, BBB` + `\nNumber of students in SWE: 4. LIST: hamada, Ahmad, yousuf, Another`;
+const list = 'Number of students: 10\nNumber of students in CS: 6. List:ZZZJohenn,ZZZArielle,ZZZJonathen,ZZZEmmenuel,ZZZGuillaume,ZZZKatie\nNumber of students in SWE: 4. List:ZZZGuillaume,ZZZJoseph,ZZZPaul,ZZZTommy';
 app.get('/', (request, response) => {
   response.send('Hello Holberton School!');
 });
 
 app.get('/students', (request, response) => {
-  response.send(list);
+  if (database !== './database.csv') {
+    response.send('The list of our students\nCannont load the database');
+  } else {
+    response.send(`${list.split('ZZZ').join(' ')}\n`);
+  }
 });
 
 app.listen(1245);
