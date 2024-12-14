@@ -10,9 +10,9 @@ app.get('/', (request, response) => {
 
 app.get('/students', (request, response) => {
   if (database !== './database.csv') {
-    response.send('The list of our students\nCannont load the database');
+    response.send('This is the list of our students\nCannot load the database');
   } else {
-    response.send(`${list.split('ZZZ').join(' ')}\n`);
+    response.send(`This is the list of our students\n${list.split('ZZZ').join(' ')}\n`);
   }
 });
 
