@@ -29,7 +29,7 @@ function countStudents(path) {
     }
     keys.sort();
     for (const key of keys) {
-      console.log(`Number of students in ${key}: ${studentsData[key].num}. LIST: ${studentsData[key].names.join(', ')}`);
+      console.log(`Number of students in ${key}: ${studentsData[key].num}. List: ${studentsData[key].names.join(', ')}`);
     }
   } catch (error) {
     throw new Error('Cannot load the database');
