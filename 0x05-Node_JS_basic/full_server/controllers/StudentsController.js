@@ -3,7 +3,7 @@ const readDatabase = require('../utils');
 class StudentsController {
   static async getAllStudents(request, response) {
     response.status(200).send(await readDatabase(process.argv[2]).then((data) => {
-      let body = '\nNumber of students: 10';
+      let body = '';
       const keys = [];
       for (const field in data) {
         if (field in data) {
@@ -12,7 +12,7 @@ class StudentsController {
       }
       keys.sort();
       for (const key of keys) {
-        body = `${body}\nNumber of students in ${key}: ${data[key].length}. List: ${data[key].join(', ')}`;
+        body = `${body}\nNumber of students in ${key}: ${data[key].length}. List of student names: ${data[key].join(', ')}`;
       }
       return `This is the list of our students${body}`;
     }, () => {
@@ -26,13 +26,12 @@ class StudentsController {
     if (major !== 'SWE' && major !== 'CS') {
       response.status(500).send('Major parameter must be CS or SWE');
     } else {
-      response.status(200).send(await readDatabase(process.argv[2]).then((data) => {
-        const list = data[major];
-        return `List: ${list.join(', ')}`;
-      }), () => {
-        response.status(500);
-        return new Error('Cannot load the database');
-      });
+      try {
+        const data = await readDatabase(process.argv[2]);
+        response.status(200).send(`List of student names: ${data[major].join(', ')}`);
+      } catch (error) {
+        response.status(500).send('Cannot load the database');
+      }
     }
   }
 }
