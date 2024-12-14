@@ -12,7 +12,7 @@ class StudentsController {
       }
       keys.sort();
       for (const key of keys) {
-        body = `${body}\nNumber of students in ${key}: ${data[key].length}. List of student names: ${data[key].join(', ')}`;
+        body = `${body}\nNumber of students in ${key}: ${data[key].length}. List: ${data[key].join(', ')}`;
       }
       return `This is the list of our students${body}`;
     }, () => {
@@ -28,7 +28,7 @@ class StudentsController {
     } else {
       try {
         const data = await readDatabase(process.argv[2]);
-        response.status(200).send(`List of student names: ${data[major].join(', ')}`);
+        response.status(200).send(`List: ${data[major].join(', ')}`);
       } catch (error) {
         response.status(500).send('Cannot load the database');
       }
