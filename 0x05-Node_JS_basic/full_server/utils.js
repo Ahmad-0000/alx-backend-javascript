@@ -15,9 +15,9 @@ async function readDatabase(path) {
         studentsData[fields[3]] = [fields[0]];
       }
     }
-    return Promise.resolve(studentsData);
+    return studentsData;
   } catch (error) {
-    return Promise.reject(error);
+    return error;
   }
 }
 
