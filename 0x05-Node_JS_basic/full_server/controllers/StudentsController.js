@@ -2,7 +2,8 @@ const readDatabase = require('../utils');
 
 class StudentsController {
   static async getAllStudents(request, response) {
-    response.status(200).send(await readDatabase(process.argv[2]).then((data) => {
+    try {
+      const data = await readDatabase(process.argv[2]);
       let body = '';
       const keys = [];
       for (const field in data) {
@@ -14,11 +15,10 @@ class StudentsController {
       for (const key of keys) {
         body = `${body}\nNumber of students in ${key}: ${data[key].length}. List: ${data[key].join(', ')}`;
       }
-      return `This is the list of our students${body}`;
-    }, () => {
-      response.status(500);
-      return new Error('Cannot load the database');
-    }));
+      response.status(200).send(`This is the list of our students${body}`);
+    } catch (error) {
+      response.status(500).send('Cannot load the database')
+    }
   }
 
   static async getAllStudentsByMajor(request, response) {
