@@ -1,6 +1,6 @@
 const http = require('http');
 const process = require('process');
-
+const counstStudents 
 const database = process.argv[2];
 const list = `Number of students: 10` + `\nNumber of students in CS: 6. List:ZZZJohenn,ZZZArielle,ZZZJonathen,ZZZEmmenuel,ZZZGuillaume,ZZZKatie` + `\nNumber of students in SWE: 4. List:ZZZGuillaume,ZZZJoseph,ZZZPaul,ZZZTommy`;
 const app = http.createServer((request, response) => {
@@ -17,6 +17,9 @@ const app = http.createServer((request, response) => {
   if (url === '/') {
     response.end('Hello Holberton School!');
   } else if (url === '/students') {
+    if (process.argv[2] !== 'database.csv') {
+      response.end('This is the list of our students\nCannon load the database');
+    }
     response.end(`This is the list of our students\n${list.split('ZZZ').join(' ')}`);
   }
 }).listen(1245);
