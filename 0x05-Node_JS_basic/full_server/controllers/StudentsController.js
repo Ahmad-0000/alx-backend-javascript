@@ -12,7 +12,7 @@ class StudentsController {
       }
       keys.sort();
       for (const key of keys) {
-        body = `${body}\nNumber of students in ${key}: ${data[key].length}. List of student names: ${data[key].join(', ')}`;
+        body = `${body}\nNumber of students in ${key}: ${data[key].length}. List: ${data[key].join(', ')}`;
       }
       return `This is the list of our students${body}`;
     }, () => {
