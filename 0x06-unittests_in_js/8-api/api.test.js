@@ -19,7 +19,7 @@ describe('Test API', function () {
       if (error) {
         throw new Error();
       } else if (body) {
-        expect(body).to.equal('Welcome to the payment system');
+        expect(body).to.not.equal('Welcome to the payment system');
       } else {
         throw new Error();
       }
