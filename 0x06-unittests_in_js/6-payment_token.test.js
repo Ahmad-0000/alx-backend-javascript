@@ -8,9 +8,9 @@ describe('getPaymentTokenFromAPI', function () {
     getPaymentTokenFromAPI(true).then((data) => {
       expect(data).to.have.property('data');
       expect(data.data).to.equal('Successful response from the API');
+      done();
     }).catch((error) => {
       done(error);
     });
-    done();
   });
 });
