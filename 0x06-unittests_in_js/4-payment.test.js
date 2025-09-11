@@ -2,21 +2,23 @@ const chai = require('chai');
 const sinon = require('sinon');
 const sendPaymentRequestToApi = require('./4-payment');
 const Utils = require('./utils');
+const {afterEach} = require('mocha');
 
 const expect = chai.expect;
+afterEach(() => {
+  sinon.restore();
+});
 
 describe('Testing how a function used', function () {
   it('tests how Utils.calculateNumber used', function () {
     const calculateNumberStub = sinon.stub(Utils, "calculateNumber");
     const consoleLogStats = sinon.spy(console, "log");
-    Utils.calculateNumber.returns(10);
+    calculateNumberStub.returns(10);
     sendPaymentRequestToApi(100, 20);
-    Utils.calculateNumber.usedWith = Utils.calculateNumber.calledWith;
-    consoleLogStats.usedWith = consoleLogStats.calledWith;
-    expect(Utils.calculateNumber.usedWith('SUM', 100, 20)).to.be.true;
+    calculateNumberStub.usedWith = calculateNumberStub.calledWith.bind(calculateNumberStub);
+    consoleLogStats.usedWith = consoleLogStats.calledWith.bind(consoleLogStats);
+    expect(calculateNumberStub.usedWith('SUM', 100, 20)).to.be.true;
     expect(Utils.calculateNumber()).to.equal(10);
     expect(consoleLogStats.usedWith('The total is: 10')).to.be.true;
-    Utils.calculateNumber.restore();
-    consoleLogStats.restore();
   });
 });
