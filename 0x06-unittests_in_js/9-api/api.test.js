@@ -28,6 +28,14 @@ describe('Test API', function () {
         throw error;
       }
       expect(response.statusCode).to.equal(200);
+    });
+  });
+
+  it ('GET /cart/:id body content', function() {
+    requests.get('http://localhost:7865/cart/100', (error, response, body) => {
+      if (error) {
+        throw error;
+      }
       expect(body).to.equal('Payment methods for cart 100');
     });
   });
