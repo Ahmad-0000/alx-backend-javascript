@@ -1,10 +1,11 @@
-export default class HolbertonCourse {
+export default class ALXCourse {
   constructor(name, length, students) {
     if (typeof name !== 'string') {
       throw new TypeError('Name must be a string');
     } else if (typeof length !== 'number') {
       throw new TypeError('Length must be a number');
-    } else if (Array.isArray(students) !== true) {
+    } else if (!Array.isArray(students) ||
+	       !students.every(e => typeof e === "string")) {
       throw new TypeError('Students must be an array');
     }
     this._name = name;
@@ -39,7 +40,8 @@ export default class HolbertonCourse {
   }
 
   set students(students) {
-    if (!Array.isArray(students)) {
+    if (!Array.isArray(students) && 
+        !students.every(e => typeof e === "string")) {
       throw new TypeError('Students must be an array');
     }
     this._students = students;
